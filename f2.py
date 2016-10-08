@@ -1,3 +1,4 @@
+import pandas as pa
 EVENTSF='blitz/co.csv'
 stepsScore={}
 evensts=open(EVENTSF,'r')
@@ -7,8 +8,8 @@ for i in evensts:
         stepsScore.update({eventData[2]:0})
     if eventData[1].find('discovered')==-1 and  eventData[1].find('viewed')!=-1:
         stepsScore[eventData[2]]+=1
-print(stepsScore)
+evensts.close()
+df=pa.DataFrame(stepsScore,index=[0])
 for x in range(10):
-    print(max(stepsScore))
-    print(stepsScore[max(stepsScore)])
-    stepsScore.pop(max(stepsScore))
+    print(df.idxmax(1)+'    '+str(df.max(1)))
+    df[df.idxmax(1)]=0

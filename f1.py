@@ -1,3 +1,4 @@
+import pandas as pa
 COSTSF='blitz/co2.csv'
 EVENTSF='blitz/co.csv'
 def readCosts(fname):
@@ -25,7 +26,7 @@ for i in evensts:
 print(str(len(usersTime))+' :user strarted, user fineshed: '+str(len(usersFinish)))
 for user in usersFinish:
     usersFinish[user]=int(usersTime[user])-int(usersFinish[user])
-print(usersFinish)
+df=pa.DataFrame(usersFinish,index=[0])
 for x in range(10):
-    print(str(x)+'    '+str(usersFinish[min(usersFinish)]))
-    usersFinish.pop(min(usersFinish))
+    print(df.idxmin(1)+'    '+str(df.min(1)))
+    df[df.idxmin(1)]= None
